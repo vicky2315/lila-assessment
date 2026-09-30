@@ -121,7 +121,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Validate output (row counts, sample coordinate vs README example → px (78, 890) on 1024, visual overlay on all 3 maps)
 - [x] Repo hygiene for two laptops: `.gitignore`, `.nvmrc`, `CLAUDE.md`
 - [x] Git init, personal git identity, first push (commit 3a39ac0)
-- [ ] Vite + React + TS scaffold, `base: /lila-assessment/`
+- [x] Vite + React + TS scaffold, `base: /lila-assessment/`
 - [ ] GitHub Actions Pages workflow; skeleton live at URL
 - [ ] End of day: push everything so personal laptop can clone
 

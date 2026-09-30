@@ -23,3 +23,6 @@
 - User works on personal laptop from Thu. Added `.gitignore`, `.nvmrc`, `CLAUDE.md`, two-laptop rules (REQUIREMENTS §1.1).
 - Found: global git identity on work laptop is the work email. Must set personal identity per repo before first commit.
 - Git init with repo-local personal identity (vigneshvinith23157@gmail.com). Added `.gitattributes` (LF everywhere) so both laptops store files the same way. First push to `main`: commit 3a39ac0, 815 files.
+- Scaffolded Vite 8 + React 19 + TypeScript app (skeleton: loads index.json, shows selected minimap). Local build and preview OK under `/lila-assessment/`.
+- Added `.github/workflows/deploy.yml`: builds on push to `main`, publishes `dist/` to Pages. Pushed (commit e825eb9).
+- First Pages deploy failed: build job passed, deploy job got 404 "Ensure GitHub Pages has been enabled". Pages API also returns 404, so Pages is not enabled on the repo yet. Waiting on user to re-check Settings > Pages.
