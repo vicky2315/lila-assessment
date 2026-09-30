@@ -1,0 +1,18 @@
+# Raw telemetry is never committed (processed output in public/ is)
+player_data/
+*.nakama-0
+
+# Python
+.venv/
+__pycache__/
+
+# Node
+node_modules/
+dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.sln
+.DS_Store
+Thumbs.db
