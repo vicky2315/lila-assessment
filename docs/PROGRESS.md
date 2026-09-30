@@ -5,7 +5,7 @@
 ## Current status
 
 **Phase:** Day 1, pipeline + scaffold
-**Next up:** git init + push, scaffold app, Pages deploy
+**Next up:** scaffold app, Pages deploy
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
@@ -22,3 +22,4 @@
 - Note: 1,253 of the 1,505 dropped duplicates were Loot rows (same player, second and position). Treated as double logging. Goes in ARCHITECTURE assumptions.
 - User works on personal laptop from Thu. Added `.gitignore`, `.nvmrc`, `CLAUDE.md`, two-laptop rules (REQUIREMENTS §1.1).
 - Found: global git identity on work laptop is the work email. Must set personal identity per repo before first commit.
+- Git init with repo-local personal identity (vigneshvinith23157@gmail.com). Added `.gitattributes` (LF everywhere) so both laptops store files the same way. First push to `main`: commit 3a39ac0, 815 files.
