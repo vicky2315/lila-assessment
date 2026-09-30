@@ -93,6 +93,8 @@ After decoding, all values belong to the 8 known event types. The script warns i
 
 **The decision.** Keep the ID rule. It is the rule the README defines, it is unambiguous, and it matches the file names. The 17 files are noted as an anomaly. Do **not** decide "bot or human" from the event name, or those 17 would be misclassified.
 
+**A second open question.** Bot files also contain `BotKill` (183 rows) and `BotKilled` (297 rows). The README only defines these from the human side ("a human was killed by a bot"). In a bot's file the meaning is not documented: a `BotKilled` there might mean a bot was killed by another bot. We don't guess. The tool shows the raw name, e.g. "BotKilled (in bot's file)".
+
 ```python
 BOT_ID = re.compile(r"^\d+$")
 df["is_bot"] = df["user_id"].map(lambda u: bool(BOT_ID.match(u)))
@@ -109,7 +111,11 @@ df["is_bot"] = df["user_id"].map(lambda u: bool(BOT_ID.match(u)))
 | BotKill | 39 |
 | BotKilled | 3 |
 
-**The decision.** Treat them as double logging and drop them. Picking up 2 items in the same second at the exact same spot is possible, but keeping the duplicates would inflate the loot heatmaps. This is an assumption and it goes in ARCHITECTURE.md.
+**The decision: keep every row.** The rule for this project is to present the data as given, with no modification. They might be double logging, or real (2 pickups in the same second at the same spot). We can't tell, so nothing is removed. The script only reports the count.
+
+What this means on screen: a duplicate event draws as 2 markers exactly on top of each other, and it counts twice in totals and heatmaps. That is what the data says.
+
+*(History: the first version dropped them. It was reversed on 09-30 by the user's "no modification" rule. See AUDIT.md §3.2.)*
 
 ### 2.5 The minimaps are not 1024 pixels
 
@@ -157,10 +163,10 @@ Applies every fix from section 2, in this order:
 1. Decode `event` bytes to text.
 2. Read `ts` as seconds.
 3. Mark bots by ID.
-4. Drop duplicates.
+4. Count exact duplicates (reported, not removed).
 5. Convert `x`, `z` to `u`, `v` (see section 4).
 
-Result: 87,599 clean rows.
+Result: all 89,104 rows, unchanged in number.
 
 ### Step 3: `build_match`
 Runs once per match and produces 2 things.

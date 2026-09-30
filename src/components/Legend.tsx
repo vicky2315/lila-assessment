@@ -37,7 +37,7 @@ export default function Legend({ match, showHumans, showBots, visibleEvents, onT
 
       <div className="legend-title">Events</div>
       {EVENT_ORDER.map((type) => (
-        <label key={type} className="legend-row" title={EVENT_STYLE[type].hint}>
+        <label key={type} className="legend-row" title={`${type}: ${EVENT_STYLE[type].hint.toLowerCase()} (README meaning, human files)`}>
           <input type="checkbox" checked={visibleEvents.has(type)} onChange={() => onToggleEvent(type)} />
           <MarkerIcon shape={EVENT_STYLE[type].shape} color={EVENT_STYLE[type].color} />
           {EVENT_STYLE[type].label}

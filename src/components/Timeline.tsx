@@ -1,4 +1,4 @@
-import { EVENT_STYLE } from '../lib/events'
+import { EVENT_STYLE, eventHint } from '../lib/events'
 import { mmss } from '../lib/format'
 import type { MatchDetail } from '../types'
 
@@ -34,7 +34,7 @@ export default function Timeline({ match, time, playing, speed, onTime, onPlayPa
               key={i}
               className="tick"
               style={{ left: `${(e[2] / dur) * 100}%`, background: EVENT_STYLE[e[1]].color }}
-              title={`${EVENT_STYLE[e[1]].hint} at ${mmss(e[2])}`}
+              title={`${eventHint(e[1], match.players[e[0]].bot)} at ${mmss(e[2])}`}
             />
           ))}
         </div>

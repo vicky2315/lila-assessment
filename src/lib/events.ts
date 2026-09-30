@@ -21,17 +21,13 @@ export const EVENT_STYLE: Record<EventType, EventStyle> = {
 }
 
 /**
- * The README defines events from the human's side. Bot files also contain BotKill / BotKilled;
- * we read those as describing the bot itself (assumption, see REQUIREMENTS §4).
+ * The README defines these events from the human's side only. Bot files contain them too,
+ * and their meaning there is not documented (a BotKilled in a bot's file may mean a bot was
+ * killed by another bot). So for bot-owned events we show the raw event name, not a guess.
  */
-const BOT_OWNED_HINT: Partial<Record<EventType, string>> = {
-  BotKill: 'Bot got a kill',
-  BotKilled: 'Bot was killed',
-  Loot: 'Bot picked up an item',
-}
-
 export function eventHint(type: EventType, ownerIsBot: boolean): string {
-  return (ownerIsBot && BOT_OWNED_HINT[type]) || EVENT_STYLE[type].hint
+  // Raw event name always; the README meaning only where the README defines it (human files)
+  return ownerIsBot ? `${type} (in bot's file)` : `${type}: ${EVENT_STYLE[type].hint.toLowerCase()}`
 }
 
 export const EVENT_ORDER: EventType[] = ['Kill', 'BotKill', 'Killed', 'BotKilled', 'KilledByStorm', 'Loot']

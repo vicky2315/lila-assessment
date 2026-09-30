@@ -75,9 +75,10 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
     # Bot detection per README: numeric user_id = bot, UUID = human.
     df["is_bot"] = df["user_id"].map(lambda u: bool(BOT_ID.match(u)))
 
-    before = len(df)
-    df = df.drop_duplicates(subset=["user_id", "match_id", "sec", "event", "x", "y", "z"])
-    print(f"  dropped {before - len(df)} duplicate rows")
+    # Rows are kept exactly as recorded, including exact duplicates (user rule: no modification
+    # of the given data). Reported only, so the count is visible.
+    dupes = df.duplicated(subset=["user_id", "match_id", "sec", "event", "x", "y", "z"]).sum()
+    print(f"  {dupes} exact duplicate rows found and kept")
 
     unknown = set(df["event"]) - set(EVENTS)
     if unknown:

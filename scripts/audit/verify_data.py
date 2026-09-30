@@ -65,16 +65,10 @@ for day in sorted(RAW.glob("February_*")):
             rows.append((t["user_id"][i], t["match_id"][i], t["map_id"][i], t["x"][i], t["y"][i], t["z"][i], sec, ev, day.name))
 print(f"raw: {files} files, {len(rows)} rows, {len(empty)} empty files {empty}")
 
-# ---- 2. Exact-duplicate removal (same key the README implies: player, match, time, event, position)
-seen = set()
-clean = []
-for r in rows:
-    key = (r[0], r[1], r[6], r[7], r[3], r[4], r[5])
-    if key in seen:
-        continue
-    seen.add(key)
-    clean.append(r)
-print(f"after dedupe: {len(clean)} rows ({len(rows) - len(clean)} dropped)")
+# ---- 2. No rows are removed: the output must contain every raw row, duplicates included
+clean = rows
+dupes = len(rows) - len({(r[0], r[1], r[6], r[7], r[3], r[4], r[5]) for r in rows})
+print(f"exact duplicate rows in raw (all must be kept): {dupes}")
 
 
 def uv(map_id, x, z):
@@ -166,6 +160,15 @@ for mid, rs in by_match.items():
         fail(f"{fid}: index day/start/dur/map wrong")
 
 print(f"checked {len(by_match)} match files + index rows")
+
+# Every raw row must appear in the output exactly once: as a track point or as an event
+out_rows = 0
+for f in (OUT / "matches").glob("*.json"):
+    d = json.loads(f.read_text(encoding="utf-8"))
+    out_rows += sum(len(p["t"]) for p in d["players"]) + len(d["events"])
+if out_rows != len(rows):
+    fail(f"output holds {out_rows} rows, raw has {len(rows)}")
+print(f"rows in output: {out_rows} (raw: {len(rows)})")
 
 # ---- 4. Heat grids: rebuild every map/day/layer and compare cell by cell
 for map_id in MAPS:

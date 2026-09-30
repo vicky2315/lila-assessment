@@ -5,7 +5,7 @@
 ## Current status
 
 **Phase:** Day 1, pipeline + scaffold
-**Next up:** user decisions on AUDIT §3.2 (A dedupe, B bot tooltip wording, C smooth playback), then Day 3 (insights, README, ARCHITECTURE, INSIGHTS, walkthrough).
+**Next up:** Day 3 (insights using the tool, README, ARCHITECTURE.md, INSIGHTS.md, walkthrough).
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
@@ -18,8 +18,8 @@
 - Wrote REQUIREMENTS.md; re-verified against brief → added grading criteria, principles, brief's checklist, ARCHITECTURE/INSIGHTS sub-items, "insights must come from tool", single-repo submission rule.
 - Repo name changed by user: `vicky2315/lila-assessment`. Updated URL and base path in REQUIREMENTS.
 - Ran preprocessing (9s). Output: 796 match files, 3 heat files, index, 3 webp minimaps. Total ~4.7 MB (data 4.1 MB, minimaps 0.55 MB, down from 24 MB).
-- Validated: 87,599 rows after dedupe; event totals match heat totals; README example point = px (78, 890); overlays on all 3 maps sit on roads and avoid rocks and water.
-- Note: 1,253 of the 1,505 dropped duplicates were Loot rows (same player, second and position). Treated as double logging. Goes in ARCHITECTURE assumptions.
+- Validated: 87,599 rows after dedupe (dedupe later removed, see 09-30 night entry); event totals match heat totals; README example point = px (78, 890); overlays on all 3 maps sit on roads and avoid rocks and water.
+- Note: 1,253 of the 1,505 dropped duplicates were Loot rows (same player, second and position). Treated as double logging at the time. Reversed 09-30: all rows kept.
 - User works on personal laptop from Thu. Added `.gitignore`, `.nvmrc`, `CLAUDE.md`, two-laptop rules (REQUIREMENTS §1.1).
 - Found: global git identity on work laptop is the work email. Must set personal identity per repo before first commit.
 - Git init with repo-local personal identity (vigneshvinith23157@gmail.com). Added `.gitattributes` (LF everywhere) so both laptops store files the same way. First push to `main`: commit 3a39ac0, 815 files.
@@ -46,3 +46,9 @@
 - Code review: 8 issues fixed (empty day selection, bad-link crash, space bar, cross-map flash, silent heat error, canvas realloc, stale tooltip, hardcoded partial day).
 - Repo, privacy and deployment clean. 804/804 live files return 200.
 - 3 interpretations listed for user decision (AUDIT §3.2).
+
+### 2026-09-30 (Wed, night): user decisions on AUDIT §3.2
+- A: keep every row. Removed dedupe from `preprocess.py`, rebuilt data (89,104 rows). `verify_data.py` now also asserts rows in = rows out: PASS.
+- B: raw event names. Tooltips, timeline ticks and legend titles show the raw name; bot-file events read e.g. "BotKilled (in bot's file)". User note: may mean a bot killed by another bot. Unconfirmed, not shown as fact.
+- C: smooth playback kept.
+- Docs updated: DATA_PIPELINE §2.3, §2.4, §3; REQUIREMENTS §4; AUDIT §2, §3.2.

@@ -103,10 +103,10 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 | Minimap size | README says 1024². Actual sizes are 4320², 2160×2158, 9000². Map via UV, never hardcode 1024 |
 | Bot detection | Numeric `user_id` = bot, UUID = human (per README). 17 bot-ID files contain `Position`/`Loot`. Keep ID rule, note anomaly |
 | Events | `event` stored as bytes → decode UTF-8. 8 types: Position, BotPosition, Kill, Killed, BotKill, BotKilled, KilledByStorm, Loot |
-| Duplicates | 1,505 exact duplicate rows → drop |
+| Duplicates | 1,505 exact duplicate rows. **Kept** (user 09-30: no modification of given data). Reported only |
 | Match date | Filter by earliest day folder (1 match crosses midnight Feb 10→11). Display date and time from the timestamp, not the folder: some folder rows start just before midnight of the previous day (e.g. Feb 10 folder, first match 2026-02-09 23:58 UTC) |
 | Match shape | 743/796 matches have 1 file (1 human, bots only visible via BotKill events). Human-vs-human Kill only 3 rows. UI shows "1 human" and only shows a bot count when bot files exist |
-| Bot-owned events | README defines BotKill/BotKilled from the human side. Bot files also contain them (183 BotKill, 297 BotKilled). Assumption: in a bot file they describe that bot (BotKill = bot got a kill, BotKilled = bot was killed). Tooltip wording follows this |
+| Bot-owned events | README defines BotKill/BotKilled from the human side only. Bot files also contain them (183 BotKill, 297 BotKilled). Meaning there is undocumented (user: BotKilled in a bot file might be a bot killed by another bot). **Shown as the raw name**, e.g. "BotKilled (in bot's file)". All tooltips show the raw event name |
 
 ## 5. UX spec
 
@@ -142,7 +142,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 
 ### Day 3: Fri 10-02
 - [x] Full audit (docs/AUDIT.md), fixes applied, re-run passes
-- [ ] User decisions on "as is" items (AUDIT §3.2)
+- [x] User decisions on "as is" items (AUDIT §3.2): A keep all rows, B raw names, C keep smooth playback
 - [ ] Polish, empty/loading/error states, edge cases
 - [ ] Find 3 insights using tool
 - [ ] README, ARCHITECTURE.md, INSIGHTS.md

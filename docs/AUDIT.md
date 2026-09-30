@@ -2,7 +2,7 @@
 
 A full check of the tool: data, UI, code, repo, deployment and docs. Each step says what was checked, why, how to re-run it, what was found and what was fixed.
 
-**Result:** all checks pass after fixes. 8 real issues found and fixed (§5). 3 items need a user decision (§3.2).
+**Result:** all checks pass after fixes. 8 real issues found and fixed (§5). 3 interpretations decided by the user and applied (§3.2).
 
 **Rules this audit follows** (REQUIREMENTS §0.0): present data as is, no new or derived datasets; small screens are not a priority.
 
@@ -10,7 +10,7 @@ A full check of the tool: data, UI, code, repo, deployment and docs. Each step s
 |---|---|---|
 | 1 | Requirements coverage | R1 to R8 met. D2 to D6 still to do (Day 3) |
 | 2 | Data: re-derive every output from raw | PASS, 0 problems |
-| 3 | "As is" review: every transform between raw and screen | 12 listed, 3 need a decision |
+| 3 | "As is" review: every transform between raw and screen | 12 listed, 3 decided and applied |
 | 4 | UI: scripted real browser | PASS, 25/25 checks |
 | 5 | Code review | 8 issues, all fixed |
 | 6 | Repo and privacy | Clean |
@@ -48,7 +48,7 @@ A full check of the tool: data, UI, code, repo, deployment and docs. Each step s
 python scripts/audit/verify_data.py
 ```
 
-**Result: PASS, 0 problems.** 1,243 files, 89,104 rows, 87,599 after dedupe, 796 matches.
+**Result: PASS, 0 problems.** 1,243 files, 89,104 rows, 796 matches. After decision A the audit also checks that the output holds every raw row: 89,104 in, 89,104 out.
 
 **What went wrong on the way (and what it teaches).** The first two runs failed, both from bugs in the audit script, not the pipeline:
 
@@ -82,13 +82,21 @@ python scripts/audit/verify_data.py
 | 8 | Heat grids: counts per cell (128 grid all matches, 64 grid per match) | The brief requires heatmaps; a heatmap is a count per area | Position within a cell |
 | 9 | Heat colour scale: capped at the 98th percentile, gamma 0.6, blurred | Otherwise one hot cell makes the rest invisible | Visual only; the hottest 2% of cells show the same top colour |
 
-### 3.2 Interpretations (need your decision)
+### 3.2 Interpretations (decided by the user, 09-30)
 
 | # | What the tool does now | Why it is an interpretation | Options |
 |---|---|---|---|
 | A | **Drops 1,505 exact duplicate rows** (1,253 of them Loot) | They could be real (2 pickups, same second, same spot) or double logging. Dropping changes loot counts by about 10% | Keep dropping (current), or keep all rows as recorded |
 | B | **Tooltip wording for events in bot files.** "Bot was killed" for `BotKilled`, "Bot got a kill" for `BotKill` | The README only defines these from the human side. The meaning in a bot's file is my guess | Keep the wording (current), or show the raw event name, e.g. "BotKilled (in bot's file)" |
 | C | **Smooth playback.** The position dot slides between 5 s samples, and paths are straight lines between samples | Positions between samples are not in the data | Keep sliding (current), or jump from sample to sample |
+
+**Decisions:**
+
+| # | Decision | Done |
+|---|---|---|
+| A | **Keep every row**, duplicates included. No modification of given data | Dedupe removed from `preprocess.py`. Data rebuilt. Audit now asserts 89,104 rows in = 89,104 out: PASS |
+| B | **Show the raw name.** A BotKilled in a bot's file might mean a bot killed by another bot, so no guessing | Tooltips, timeline ticks and legend titles all show the raw event name. README meaning is added only for human files |
+| C | **Keep smooth playback** | No change |
 
 Nothing else in the tool adds or derives data.
 
