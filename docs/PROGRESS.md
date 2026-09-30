@@ -5,13 +5,13 @@
 ## Current status
 
 **Phase:** Day 1, pipeline + scaffold
-**Next up:** manual playback check, then Day 3 (polish, insights, docs, walkthrough).
+**Next up:** user decisions on AUDIT §3.2 (A dedupe, B bot tooltip wording, C smooth playback), then Day 3 (insights, README, ARCHITECTURE, INSIGHTS, walkthrough).
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
 
 ### 2026-09-30 (Wed)
-- Read brief. Probed raw data (1,242 parquet files, 89,104 rows, 796 matches, 0 unreadable files).
+- Read brief. Probed raw data (1,243 parquet files [first probe said 1,242 by grouping on file name; corrected in audit 09-30], 89,104 rows, 796 matches, 0 unreadable files).
 - Found data quirks → recorded in REQUIREMENTS §4 (ts = unix seconds, real minimap sizes, bot-ID anomaly, dupes).
 - Locked decisions: React + TS, GH Pages repo `lila-assessment`, processed data only.
 - Wrote `scripts/preprocess.py` + `scripts/requirements.txt` (not run yet).
@@ -36,3 +36,13 @@
 - Fixes from the screenshots: heatmap contrast (normalise to 98th percentile instead of max), match date from the timestamp instead of the folder, "1 human" instead of "1H · 0B", tooltip wording for events in bot files.
 - User asked for per-match heatmaps. Added "This match / All matches" scope. Per-match heat builds up with playback.
 - Decisions logged in REQUIREMENTS §4 and §5.
+
+### 2026-09-30 (Wed, night): full audit
+- User rules added (REQUIREMENTS §0.0): present data as is, no new or derived data; small screens not a priority.
+- Ran full audit, written up in `docs/AUDIT.md`. Scripts in `scripts/audit/`.
+- Data re-derived from raw by an independent script: PASS. Two audit-script bugs on the way (timezone, sort-before-round), both documented as lessons.
+- File count corrected: 1,243 (not 1,242). One file name repeats across Feb 10 and Feb 11.
+- Scripted browser test: 25/25 PASS after fixes.
+- Code review: 8 issues fixed (empty day selection, bad-link crash, space bar, cross-map flash, silent heat error, canvas realloc, stale tooltip, hardcoded partial day).
+- Repo, privacy and deployment clean. 804/804 live files return 200.
+- 3 interpretations listed for user decision (AUDIT §3.2).

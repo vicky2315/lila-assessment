@@ -4,7 +4,7 @@ import MapView from './components/MapView'
 import Sidebar from './components/Sidebar'
 import Timeline from './components/Timeline'
 import { loadHeat, loadIndex, loadMatch, minimapUrl } from './data'
-import { EVENT_ORDER } from './lib/events'
+import { EVENT_ORDER, HEAT_LAYERS } from './lib/events'
 import { MATCH_HEAT_BINS, heatToCanvas, matchHeat, sumHeat } from './lib/heat'
 import { useHashState } from './lib/useHashState'
 import type { DataIndex, EventType, HeatFile, HeatLayer, HeatScope, MapId, MatchDetail } from './types'
@@ -12,6 +12,8 @@ import type { DataIndex, EventType, HeatFile, HeatLayer, HeatScope, MapId, Match
 type HashKey = 'map' | 'days' | 'match' | 'layer' | 'heat'
 
 const DEFAULT_MAP: MapId = 'AmbroseValley'
+const NO_DAYS = 'none'
+const LAYER_IDS: (HeatLayer | 'none')[] = ['none', ...HEAT_LAYERS.map((l) => l.id)]
 
 export default function App() {
   const [index, setIndex] = useState<DataIndex | null>(null)
@@ -30,8 +32,14 @@ function Explorer({ index }: { index: DataIndex }) {
   // Shareable state lives in the URL hash
   const [hash, setHash] = useHashState<HashKey>()
   const map: MapId = hash.map && hash.map in index.maps ? (hash.map as MapId) : DEFAULT_MAP
-  const days = useMemo(() => (hash.days ? hash.days.split(',').filter((d) => index.days.includes(d)) : index.days), [hash.days, index.days])
-  const layer: HeatLayer | 'none' = (hash.layer as HeatLayer | 'none') ?? 'traffic'
+  // No 'days' param = all days. 'none' is explicit so an empty selection survives the URL round trip.
+  const days = useMemo(() => {
+    if (!hash.days) return index.days
+    if (hash.days === NO_DAYS) return []
+    return hash.days.split(',').filter((d) => index.days.includes(d))
+  }, [hash.days, index.days])
+  // Validate URL values: a hand-edited link must never crash the app
+  const layer: HeatLayer | 'none' = LAYER_IDS.includes(hash.layer as HeatLayer | 'none') ? (hash.layer as HeatLayer | 'none') : 'traffic'
   const matchId = hash.match ?? null
 
   // Local view state
@@ -41,7 +49,7 @@ function Explorer({ index }: { index: DataIndex }) {
   const [heatOpacity, setHeatOpacity] = useState(0.7)
 
   // Selected match + playback
-  const [match, setMatch] = useState<MatchDetail | null>(null)
+  const [loadedMatch, setMatch] = useState<MatchDetail | null>(null)
   const [matchError, setMatchError] = useState<string | null>(null)
   const [time, setTime] = useState(0)
   const [playing, setPlaying] = useState(false)
@@ -68,6 +76,9 @@ function Explorer({ index }: { index: DataIndex }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matchId])
+
+  // Only use the match if it belongs to the map on screen (a shared link switches map right after loading)
+  const match = loadedMatch && loadedMatch.map === map ? loadedMatch : null
 
   // Playback loop
   useEffect(() => {
@@ -98,21 +109,25 @@ function Explorer({ index }: { index: DataIndex }) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement).tagName
-      if (e.code === 'Space' && tag !== 'INPUT' && tag !== 'SELECT' && tag !== 'TEXTAREA') {
+      if (e.code === 'Space' && match && tag !== 'INPUT' && tag !== 'SELECT' && tag !== 'TEXTAREA') {
         e.preventDefault()
         playPause()
       }
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [playPause])
+  }, [playPause, match])
 
   // Heatmap: aggregate over every match on this map for the selected days
   const [heatFile, setHeatFile] = useState<HeatFile | null>(null)
+  const [heatError, setHeatError] = useState<string | null>(null)
   useEffect(() => {
     setHeatFile(null)
     let cancelled = false
-    loadHeat(map).then((h) => !cancelled && setHeatFile(h))
+    setHeatError(null)
+    loadHeat(map)
+      .then((h) => !cancelled && setHeatFile(h))
+      .catch((e: Error) => !cancelled && setHeatError(e.message))
     return () => {
       cancelled = true
     }
@@ -137,7 +152,7 @@ function Explorer({ index }: { index: DataIndex }) {
 
   const selectMatch = (id: string | null) => setHash({ match: id })
   const selectMap = (m: MapId) => setHash({ map: m, match: null })
-  const selectDays = (d: string[]) => setHash({ days: d.length === index.days.length ? null : d.join(',') })
+  const selectDays = (d: string[]) => setHash({ days: d.length === index.days.length ? null : d.length ? d.join(',') : NO_DAYS })
   const selectLayer = (l: HeatLayer | 'none') => setHash({ layer: l === 'traffic' ? null : l })
 
   const toggleEvent = (e: EventType) =>
@@ -171,7 +186,7 @@ function Explorer({ index }: { index: DataIndex }) {
         <MapView
           cfg={index.maps[map]}
           imageUrl={minimapUrl(map)}
-          match={match && match.map === map ? match : null}
+          match={match}
           time={time}
           heat={heat.canvas}
           heatOpacity={heatOpacity}
@@ -192,6 +207,7 @@ function Explorer({ index }: { index: DataIndex }) {
           <div className="hint">Pick a match on the left to see player paths and replay it. With no match picked, the heatmap covers every match on the selected days.</div>
         )}
         {matchError && <div className="hint error">Could not load match: {matchError}</div>}
+        {heatError && layer !== 'none' && <div className="hint error">Could not load heatmap: {heatError}</div>}
         {match && (
           <Timeline
             match={match}

@@ -12,7 +12,7 @@ Read it in order. Each section builds on the one before.
 
 ```
 player_data/
-  February_10/ ... February_14/   1,242 data files (README says 1,243)
+  February_10/ ... February_14/   1,243 data files (1,242 unique names: one match crosses midnight, so the same player+match file name appears in both Feb 10 and Feb 11)
   minimaps/                       3 map images
   README.md                       schema, map config, coordinate formula
 ```
@@ -219,7 +219,7 @@ public/
 ### Why preprocess at all
 
 The browser could read the parquet files directly, but then:
-- it would download all 1,242 files and 24 MB of images before showing anything,
+- it would download all 1,243 files and 24 MB of images before showing anything,
 - the parquet library would add weight to the page,
 - every data fix would have to live in front-end code.
 

@@ -15,6 +15,11 @@
 - **Usable without help**: reviewer must open URL and use it cold: sensible default view, legend, empty/loading states, no setup.
 - **AI use permitted and expected.**
 
+## 0.0 User rules (09-30, override everything below)
+
+- **Present data as is.** No new or derived datasets, no features that need data we don't have. Only the transforms needed to read and draw the data correctly. Any interpretation is listed in `docs/AUDIT.md` §3 for the user to approve.
+- **Small-screen layout is not a priority.** Desktop first. Don't spend time on mobile.
+
 ## 0.1 How we're graded
 
 | Area | What they check | Where we answer it |
@@ -49,16 +54,16 @@
 
 ## 2. Core requirements (from brief, all must ship)
 
-| ID | Requirement | Status |
+| ID | Requirement | Status (audit step in docs/AUDIT.md) |
 |---|---|---|
-| R1 | Load and parse provided parquet data (done offline by `preprocess.py`; app loads derived JSON) | ☐ |
-| R2 | Player journeys on correct minimap, world coords mapped correctly | ☐ |
-| R3 | Humans vs bots visually distinct | ☐ |
-| R4 | Distinct markers: kills, deaths, loot, storm deaths | ☐ |
-| R5 | Filter by map, date, match | ☐ |
-| R6 | Timeline / playback of a match | ☐ |
-| R7 | Heatmaps: kill zones, death zones, traffic | ☐ |
-| R8 | Hosted, shareable link | ☐ |
+| R1 | Load and parse provided parquet data (done offline by `preprocess.py`; app loads derived JSON) | ✅ audit 2 |
+| R2 | Player journeys on correct minimap, world coords mapped correctly | ✅ audit 2, overlay |
+| R3 | Humans vs bots visually distinct | ✅ audit 4 |
+| R4 | Distinct markers: kills, deaths, loot, storm deaths | ✅ audit 4 |
+| R5 | Filter by map, date, match | ✅ audit 4 |
+| R6 | Timeline / playback of a match | ✅ audit 4 |
+| R7 | Heatmaps: kill zones, death zones, traffic | ✅ audit 2, 4 |
+| R8 | Hosted, shareable link | ✅ audit 4, 7 |
 
 ## 3. Deliverables (repo must contain)
 
@@ -68,7 +73,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 
 | ID | Deliverable | Status |
 |---|---|---|
-| D1 | All source code for the tool | ☐ |
+| D1 | All source code for the tool | ✅ audit 6 |
 | D2 | Working deployment URL (in README) | ☐ |
 | D3 | README: tech stack, setup steps, env vars (state "none" explicitly) | ☐ |
 | D4 | ARCHITECTURE.md, **max 1 page**: (a) what built with + why, (b) data flow parquet → screen, (c) coordinate mapping walkthrough ("the tricky part"), (d) assumptions where data ambiguous + how handled, (e) major tradeoffs table | ☐ |
@@ -77,13 +82,13 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 
 ## 3.1 Brief's pre-submit checklist (verbatim, tick at end)
 
-- [ ] Tool is live at the hosted URL
-- [ ] Player paths render correctly on the minimap
-- [ ] Can tell humans apart from bots visually
-- [ ] Kill, death, loot, and storm events are marked
-- [ ] Filtering by map/date/match works
-- [ ] Timeline or playback shows match progression
-- [ ] Heatmaps show kill zones, death zones, and traffic
+- [x] Tool is live at the hosted URL
+- [x] Player paths render correctly on the minimap
+- [x] Can tell humans apart from bots visually
+- [x] Kill, death, loot, and storm events are marked
+- [x] Filtering by map/date/match works
+- [x] Timeline or playback shows match progression
+- [x] Heatmaps show kill zones, death zones, and traffic
 - [ ] Architecture doc covers coordinate mapping approach
 - [ ] Three insights with supporting evidence
 - [ ] Walkthrough covers all major features
@@ -131,11 +136,13 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Paths + human/bot styling
 - [x] Event markers + legend + tooltip
 - [x] Filters: map, date, match list
-- [~] Timeline playback (built; needs a manual click-through, headless test can only check the static view)
+- [x] Timeline playback (verified by scripted browser, audit 4)
 - [x] Heatmaps (aggregate + per-match, per user 09-30)
 - [x] URL state (map, days, match, layer, heat scope in hash)
 
 ### Day 3: Fri 10-02
+- [x] Full audit (docs/AUDIT.md), fixes applied, re-run passes
+- [ ] User decisions on "as is" items (AUDIT §3.2)
 - [ ] Polish, empty/loading/error states, edge cases
 - [ ] Find 3 insights using tool
 - [ ] README, ARCHITECTURE.md, INSIGHTS.md

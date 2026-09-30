@@ -32,6 +32,9 @@ const SORTERS: Record<SortKey, (a: MatchSummary, b: MatchSummary) => number> = {
   bots: (a, b) => b.bots - a.bots,
 }
 
+// Stated in the dataset README
+const PARTIAL_DAY = 'February_14'
+
 // Most matches have one human and no bot files: bots they fought appear only as BotKill/BotKilled events.
 
 export default function Sidebar(props: Props) {
@@ -80,7 +83,7 @@ export default function Sidebar(props: Props) {
             </button>
           ))}
         </div>
-        {index.days.at(-1) && <p className="note">{dayLabel(index.days.at(-1)!)} is a partial day.</p>}
+        {index.days.includes(PARTIAL_DAY) && <p className="note">{dayLabel(PARTIAL_DAY)} is a partial day (data collection was still running).</p>}
       </section>
 
       <section>

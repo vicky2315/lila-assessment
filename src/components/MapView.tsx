@@ -104,8 +104,9 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
     const canvas = canvasRef.current
     if (!canvas || !size.w) return
     const dpr = window.devicePixelRatio || 1
-    canvas.width = size.w * dpr
-    canvas.height = size.h * dpr
+    // Assigning width/height reallocates the buffer, so only do it when the size really changed
+    if (canvas.width !== size.w * dpr) canvas.width = size.w * dpr
+    if (canvas.height !== size.h * dpr) canvas.height = size.h * dpr
     const ctx = canvas.getContext('2d')!
     ctx.setTransform(1, 0, 0, 1, 0, 0)
     ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -233,7 +234,7 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
         <button onClick={() => zoomAt(1 / 1.4, size.w / 2, size.h / 2)} title="Zoom out">−</button>
         <button onClick={fit} title="Fit map to screen">Fit</button>
       </div>
-      {hover && (
+      {hover && hover.ev[2] <= time && (
         <div className="tooltip" style={{ left: hover.x + 12, top: hover.y + 12 }}>
           <strong style={{ color: EVENT_STYLE[hover.ev[1]].color }}>{eventHint(hover.ev[1], hover.player.bot)}</strong>
           <div>
