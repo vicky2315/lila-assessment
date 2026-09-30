@@ -28,3 +28,4 @@
 - First Pages deploy failed: build job passed, deploy job got 404 "Ensure GitHub Pages has been enabled". Pages API also returns 404, so Pages is not enabled on the repo yet. Waiting on user to re-check Settings > Pages.
 - Pages re-checked by user. Second deploy succeeded (commit b172664). Live: https://vicky2315.github.io/lila-assessment/ . Page, JS, index.json, minimaps and heat files all return 200.
 - Non-blocking: GitHub warns actions v4 run on Node 20 (deprecated, forced to Node 24). Works today. Revisit only if it breaks.
+- Wrote `docs/DATA_PIPELINE.md` (learning guide: raw format, each data quirk as an investigation, pipeline step by step, coordinate maths, exercises). Moved exploration scripts into `scripts/explore/` with repo-relative paths.
