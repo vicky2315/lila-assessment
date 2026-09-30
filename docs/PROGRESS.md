@@ -52,3 +52,10 @@
 - B: raw event names. Tooltips, timeline ticks and legend titles show the raw name; bot-file events read e.g. "BotKilled (in bot's file)". User note: may mean a bot killed by another bot. Unconfirmed, not shown as fact.
 - C: smooth playback kept.
 - Docs updated: DATA_PIPELINE §2.3, §2.4, §3; REQUIREMENTS §4; AUDIT §2, §3.2.
+- Deployed (commit de2b7e1). Live checks: UI audit 25/25 PASS on https://vicky2315.github.io/lila-assessment/ ; live Loot total 12,885 = raw count, so duplicates are kept on the live site too.
+
+### End of session 2026-09-30 (work laptop): handoff
+- **State:** R1 to R8 done and verified (AUDIT.md). Working tree clean, everything pushed.
+- **Next (Day 3, personal laptop):** find 3 insights using the tool, then README (with live URL, stack, setup, "no env vars"), ARCHITECTURE.md (one page), INSIGHTS.md, walkthrough. Task list: REQUIREMENTS §6.
+- **Personal laptop setup:** install Git + Node 24, `git clone https://github.com/vicky2315/lila-assessment.git`, `npm install`, `npm run dev`, set repo-local `git config user.email vigneshvinith23157@gmail.com` and `user.name Vignesh`.
+- **Only if re-running pipeline or audits:** Python 3.10+, raw `player_data/` next to the repo folder, `pip install -r scripts/requirements.txt`. UI audit also needs `npm i --no-save puppeteer-core` and a Chrome path argument if Chrome is not at the Windows default.
