@@ -122,7 +122,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Repo hygiene for two laptops: `.gitignore`, `.nvmrc`, `CLAUDE.md`
 - [x] Git init, personal git identity, first push (commit 3a39ac0)
 - [x] Vite + React + TS scaffold, `base: /lila-assessment/`
-- [ ] GitHub Actions Pages workflow; skeleton live at URL
+- [x] GitHub Actions Pages workflow; skeleton live at URL
 - [ ] End of day: push everything so personal laptop can clone
 
 ### Day 2: Thu 10-01

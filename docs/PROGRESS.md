@@ -5,7 +5,7 @@
 ## Current status
 
 **Phase:** Day 1, pipeline + scaffold
-**Next up:** scaffold app, Pages deploy
+**Next up:** Day 2 tasks (map canvas, paths, markers, filters, playback, heatmaps). Start on personal laptop.
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
@@ -26,3 +26,5 @@
 - Scaffolded Vite 8 + React 19 + TypeScript app (skeleton: loads index.json, shows selected minimap). Local build and preview OK under `/lila-assessment/`.
 - Added `.github/workflows/deploy.yml`: builds on push to `main`, publishes `dist/` to Pages. Pushed (commit e825eb9).
 - First Pages deploy failed: build job passed, deploy job got 404 "Ensure GitHub Pages has been enabled". Pages API also returns 404, so Pages is not enabled on the repo yet. Waiting on user to re-check Settings > Pages.
+- Pages re-checked by user. Second deploy succeeded (commit b172664). Live: https://vicky2315.github.io/lila-assessment/ . Page, JS, index.json, minimaps and heat files all return 200.
+- Non-blocking: GitHub warns actions v4 run on Node 20 (deprecated, forced to Node 24). Works today. Revisit only if it breaks.
