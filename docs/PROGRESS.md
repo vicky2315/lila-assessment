@@ -5,7 +5,7 @@
 ## Current status
 
 **Phase:** Day 1, pipeline + scaffold
-**Next up:** Day 2 tasks (map canvas, paths, markers, filters, playback, heatmaps). Start on personal laptop.
+**Next up:** manual playback check, then Day 3 (polish, insights, docs, walkthrough).
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
@@ -29,3 +29,10 @@
 - Pages re-checked by user. Second deploy succeeded (commit b172664). Live: https://vicky2315.github.io/lila-assessment/ . Page, JS, index.json, minimaps and heat files all return 200.
 - Non-blocking: GitHub warns actions v4 run on Node 20 (deprecated, forced to Node 24). Works today. Revisit only if it breaks.
 - Wrote `docs/DATA_PIPELINE.md` (learning guide: raw format, each data quirk as an investigation, pipeline step by step, coordinate maths, exercises). Moved exploration scripts into `scripts/explore/` with repo-relative paths.
+
+### 2026-09-30 (Wed, evening): Day 2 tasks started early
+- Built the explorer UI: `MapView` (canvas, pan/zoom, paths, markers, hover tooltip), `Sidebar` (map, days, heatmap, match list), `Legend` (doubles as toggles), `Timeline` (play/pause, speed, scrubber, event ticks), `useHashState` (shareable URL).
+- Chrome extension not connected, so tested with headless Chrome screenshots. Overview, match view, per-match heat and all-match heat render correctly.
+- Fixes from the screenshots: heatmap contrast (normalise to 98th percentile instead of max), match date from the timestamp instead of the folder, "1 human" instead of "1H · 0B", tooltip wording for events in bot files.
+- User asked for per-match heatmaps. Added "This match / All matches" scope. Per-match heat builds up with playback.
+- Decisions logged in REQUIREMENTS §4 and §5.

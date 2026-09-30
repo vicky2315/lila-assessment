@@ -99,16 +99,17 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 | Bot detection | Numeric `user_id` = bot, UUID = human (per README). 17 bot-ID files contain `Position`/`Loot`. Keep ID rule, note anomaly |
 | Events | `event` stored as bytes → decode UTF-8. 8 types: Position, BotPosition, Kill, Killed, BotKill, BotKilled, KilledByStorm, Loot |
 | Duplicates | 1,505 exact duplicate rows → drop |
-| Match date | Use earliest day folder (1 match crosses midnight Feb 10→11) |
-| Match shape | 743/796 matches have 1 file (1 human, bots only visible via BotKill events). Human-vs-human Kill only 3 rows |
+| Match date | Filter by earliest day folder (1 match crosses midnight Feb 10→11). Display date and time from the timestamp, not the folder: some folder rows start just before midnight of the previous day (e.g. Feb 10 folder, first match 2026-02-09 23:58 UTC) |
+| Match shape | 743/796 matches have 1 file (1 human, bots only visible via BotKill events). Human-vs-human Kill only 3 rows. UI shows "1 human" and only shows a bot count when bot files exist |
+| Bot-owned events | README defines BotKill/BotKilled from the human side. Bot files also contain them (183 BotKill, 297 BotKilled). Assumption: in a bot file they describe that bot (BotKill = bot got a kill, BotKilled = bot was killed). Tooltip wording follows this |
 
 ## 5. UX spec
 
-- **Left sidebar:** map selector, date multi-select, match list (sortable, shows duration/humans/bots/kills), show humans / show bots toggles, event-type toggles.
+- **Left sidebar:** map selector, date multi-select, heatmap controls, match list (search by ID, sort, shows date, duration, humans, bots, kills, died / storm death).
 - **Main:** minimap canvas, pan + zoom, paths (humans solid bright, bots dashed muted), event markers with distinct shape+color, hover tooltip.
 - **Bottom bar:** play/pause, speed (1×/5×/10×/20×), scrubber with elapsed mm:ss.
-- **Heatmap mode:** layer select (traffic / kills / deaths / storm / loot), respects map + date filters; opacity slider.
-- **Legend** always visible.
+- **Heatmap:** layer select (off / traffic / kills / deaths / storm / loot), opacity slider. Scope: no match selected = all matches on selected map + days. Match selected = "This match" (default, builds up with playback, respects human/bot toggles) or "All matches" (aggregate under the match paths).
+- **Legend** always visible, top right. Doubles as the human / bot and event-type toggles, with counts for the selected match.
 - **URL state:** map/date/match/layer in URL hash so a view is shareable.
 
 ## 6. Task list
@@ -123,16 +124,16 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Git init, personal git identity, first push (commit 3a39ac0)
 - [x] Vite + React + TS scaffold, `base: /lila-assessment/`
 - [x] GitHub Actions Pages workflow; skeleton live at URL
-- [ ] End of day: push everything so personal laptop can clone
+- [x] End of day: push everything so personal laptop can clone
 
 ### Day 2: Thu 10-01
-- [ ] Map canvas: minimap render, pan/zoom, UV→px transform
-- [ ] Paths + human/bot styling
-- [ ] Event markers + legend + tooltip
-- [ ] Filters: map, date, match list
-- [ ] Timeline playback
-- [ ] Heatmaps (aggregate + per-match)
-- [ ] URL state
+- [x] Map canvas: minimap render, pan/zoom, UV→px transform
+- [x] Paths + human/bot styling
+- [x] Event markers + legend + tooltip
+- [x] Filters: map, date, match list
+- [~] Timeline playback (built; needs a manual click-through, headless test can only check the static view)
+- [x] Heatmaps (aggregate + per-match, per user 09-30)
+- [x] URL state (map, days, match, layer, heat scope in hash)
 
 ### Day 3: Fri 10-02
 - [ ] Polish, empty/loading/error states, edge cases
