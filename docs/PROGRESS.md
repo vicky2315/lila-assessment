@@ -77,3 +77,4 @@
 - Added a Reset view link next to the Map heading: clears the URL state, legend toggles, sliders, speed, match search and sort, and fits the map. Reason: a shared or autocompleted link opens the last view, user wanted a one-click way back. UI audit has 2 new checks for it: 27/27 PASS.
 - Added a heatmap colour key (Fewer to More bar, same colours as the heatmap) and a line saying who is counted (humans and bots; per match it follows the legend toggles). Reason: user read red/yellow as human/bot. UI audit 27/27 PASS.
 - Fixed walkthrough shot list: first suggested match (de5aa1ae) has 0 humans. Replaced with d3a3297e (1 human, 13 bots).
+- Walkthrough recorded by user (5:36, 720p, 263 MB). Compressed with ffmpeg (H.264 CRF 28, AAC 96k, faststart; ffmpeg-static installed with --no-save) to 16.3 MB as `docs/walkthrough.mp4`, linked in README. `*.mp4` marked binary in .gitattributes. D6 done: every requirement and deliverable is now ticked.

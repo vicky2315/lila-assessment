@@ -4,7 +4,7 @@ A web tool for level designers to see how players move, fight, loot and die on t
 
 **Live tool:** https://vicky2315.github.io/lila-assessment/
 
-**Walkthrough:** _(to be added)_
+**Walkthrough:** [docs/walkthrough.mp4](docs/walkthrough.mp4) (5:36 video of every feature)
 
 ## How to use it
 
