@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="268" viewBox="0 0 720 268" role="img" aria-label="Players who died were picking up less loot per minute">
+<style>
+  svg { --surface:#fcfcfb; --text:#0b0b0b; --text2:#52514e; --muted:#8a8984; --grid:#e4e3df;
+        --s1:#2a78d6; --s2:#eb6834; --base:#b4b2ab; --died:#86b6ef; --survived:#1c5cab; }
+  @media (prefers-color-scheme: dark) {
+    svg { --surface:#1a1a19; --text:#ffffff; --text2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+          --s1:#3987e5; --s2:#d95926; --base:#6e6d68; --died:#2a78d6; --survived:#86b6ef; }
+  }
+  text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--text); }
+  .title { font-size: 16px; font-weight: 600; }
+  .sub { font-size: 12px; fill: var(--text2); }
+  .label { font-size: 12px; fill: var(--text2); }
+  .value { font-size: 12px; font-weight: 600; }
+  .axis { font-size: 11px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width: 1; }
+</style>
+<title>Players who died were picking up less loot per minute</title>
+<rect width="720" height="268" rx="8" fill="var(--surface)"/>
+<text class="title" x="24" y="34">Players who died were picking up less loot per minute</text><text class="sub" x="24" y="54">Mean loot items per minute alive, human players alive at least 1 minute</text><rect x="24" y="75" width="10" height="10" rx="2" fill="var(--died)"/><text class="label" x="39" y="84">Died</text><rect x="82" y="75" width="10" height="10" rx="2" fill="var(--survived)"/><text class="label" x="97" y="84">Survived</text><line class="grid" x1="576.8571428571429" x2="576.8571428571429" y1="100" y2="236"/><line class="grid" x1="442.57142857142856" x2="442.57142857142856" y1="100" y2="236"/><line class="grid" x1="308.2857142857143" x2="308.2857142857143" y1="100" y2="236"/><line class="grid" x1="174.0" x2="174.0" y1="100" y2="236"/><text class="label" x="24" y="121">Ambrose Valley</text><text class="axis" x="24" y="136">551 players</text><line x1="460.9574635835961" x2="573.1270532542874" y1="116" y2="116" stroke="var(--base)" stroke-width="2"/><circle cx="460.9574635835961" cy="116" r="6" fill="var(--died)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="448.9574635835961" y="120" text-anchor="end">2.1</text><circle cx="573.1270532542874" cy="116" r="6" fill="var(--survived)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="585.1270532542874" y="120" text-anchor="start">3.0</text><text class="label" x="24" y="169">Lockdown</text><text class="axis" x="24" y="184">163 players</text><line x1="360.205775487742" x2="441.0136725443133" y1="164" y2="164" stroke="var(--base)" stroke-width="2"/><circle cx="360.205775487742" cy="164" r="6" fill="var(--died)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="348.205775487742" y="168" text-anchor="end">1.4</text><circle cx="441.0136725443133" cy="164" r="6" fill="var(--survived)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="453.0136725443133" y="168" text-anchor="start">2.0</text><text class="label" x="24" y="217">GrandRift</text><text class="axis" x="24" y="232">56 players</text><line x1="403.1893605963528" x2="533.3691764613155" y1="212" y2="212" stroke="var(--base)" stroke-width="2"/><circle cx="403.1893605963528" cy="212" r="6" fill="var(--died)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="391.1893605963528" y="216" text-anchor="end">1.7</text><circle cx="533.3691764613155" cy="212" r="6" fill="var(--survived)" stroke="var(--surface)" stroke-width="2"/><text class="value" x="545.3691764613155" y="216" text-anchor="start">2.7</text><text class="axis" x="174.0" y="252" text-anchor="middle">0</text><text class="axis" x="308.2857142857143" y="252" text-anchor="middle">1</text><text class="axis" x="442.57142857142856" y="252" text-anchor="middle">2</text><text class="axis" x="576.8571428571429" y="252" text-anchor="middle">3</text>
+</svg>

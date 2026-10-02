@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="318" viewBox="0 0 720 318" role="img" aria-label="Fight zones take a bigger share of kills and deaths than of movement">
+<style>
+  svg { --surface:#fcfcfb; --text:#0b0b0b; --text2:#52514e; --muted:#8a8984; --grid:#e4e3df;
+        --s1:#2a78d6; --s2:#eb6834; --base:#b4b2ab; --died:#86b6ef; --survived:#1c5cab; }
+  @media (prefers-color-scheme: dark) {
+    svg { --surface:#1a1a19; --text:#ffffff; --text2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+          --s1:#3987e5; --s2:#d95926; --base:#6e6d68; --died:#2a78d6; --survived:#86b6ef; }
+  }
+  text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--text); }
+  .title { font-size: 16px; font-weight: 600; }
+  .sub { font-size: 12px; fill: var(--text2); }
+  .label { font-size: 12px; fill: var(--text2); }
+  .value { font-size: 12px; font-weight: 600; }
+  .axis { font-size: 11px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width: 1; }
+</style>
+<title>Fight zones take a bigger share of kills and deaths than of movement</title>
+<rect width="720" height="318" rx="8" fill="var(--surface)"/>
+<text class="title" x="24" y="34">Fight zones take a bigger share of kills and deaths than of movement</text><text class="sub" x="24" y="54">Share of each map's total that happens inside the zone</text><rect x="24" y="75" width="10" height="10" rx="2" fill="var(--base)"/><text class="label" x="39" y="84">Share of movement</text><rect x="173" y="75" width="10" height="10" rx="2" fill="var(--s1)"/><text class="label" x="188" y="84">Share of kills</text><rect x="301" y="75" width="10" height="10" rx="2" fill="var(--s2)"/><text class="label" x="316" y="84">Share of deaths</text><line class="grid" x1="614.0" x2="614.0" y1="104" y2="286"/><line class="grid" x1="526.0" x2="526.0" y1="104" y2="286"/><line class="grid" x1="438.0" x2="438.0" y1="104" y2="286"/><line class="grid" x1="350.0" x2="350.0" y1="104" y2="286"/><line class="grid" x1="262.0" x2="262.0" y1="104" y2="286"/><line class="grid" x1="174.0" x2="174.0" y1="104" y2="286"/><text class="value" x="24" y="140">Mine Pit</text><text class="sub" x="24" y="156">GrandRift</text><path d="M174,110 h143.8 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-143.8 z" fill="var(--base)"/><text class="value" x="329.7932960893855" y="125">17%</text><path d="M174,134 h235.6 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-235.6 z" fill="var(--s1)"/><text class="value" x="421.55555555555554" y="149">27%</text><path d="M174,158 h406.7 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-406.7 z" fill="var(--s2)"/><text class="value" x="592.6666666666667" y="173">47%</text><text class="axis" x="628.6666666666667" y="173">14 of 30</text><text class="value" x="24" y="238">River</text><text class="sub" x="24" y="254">Ambrose Valley</text><path d="M174,208 h146.1 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-146.1 z" fill="var(--base)"/><text class="value" x="332.10214546498753" y="223">17%</text><path d="M174,232 h201.5 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-201.5 z" fill="var(--s1)"/><text class="value" x="387.4741896758703" y="247">23%</text><path d="M174,256 h241.1 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-241.1 z" fill="var(--s2)"/><text class="value" x="427.0632911392405" y="271">28%</text><text class="axis" x="463.0632911392405" y="271">88 of 316</text><text class="axis" x="174.0" y="302" text-anchor="middle">0%</text><text class="axis" x="262.0" y="302" text-anchor="middle">10%</text><text class="axis" x="350.0" y="302" text-anchor="middle">20%</text><text class="axis" x="438.0" y="302" text-anchor="middle">30%</text><text class="axis" x="526.0" y="302" text-anchor="middle">40%</text><text class="axis" x="614.0" y="302" text-anchor="middle">50%</text>
+</svg>

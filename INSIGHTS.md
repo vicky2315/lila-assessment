@@ -2,7 +2,7 @@
 
 Three things I found while using the tool. Each one says what caught my eye, the evidence, what could be done about it, and why a level designer should care.
 
-All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deaths" means deaths of human players unless stated otherwise.
+All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deaths" means deaths of human players unless stated otherwise. `scripts/insights/charts.py` recomputes every number here from the same data the tool loads and draws the charts.
 
 ---
 
@@ -18,6 +18,8 @@ All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deat
 | 1 human + 4 to 15 bot files | 36 |
 | Bot files only, no human | 16 |
 | 2 humans | 1 |
+
+![Matches by players recorded, and what killed human players](docs/img/insight-test-data.svg)
 
 The deaths point the same way. Out of 442 human deaths, 400 (90%) were caused by bots and 39 by the storm. Only **3** were caused by another human. Across all matches, humans killed 2,232 bots and only 3 humans.
 
@@ -61,6 +63,8 @@ It works like Pochinki on PUBG's Erangel: a central spot with good loot that pul
 
 Players die there more often than you would expect from how much time they spend there. It is like the bridges on Erangel: everyone has to cross, few routes lead over, and that makes them easy places to be caught.
 
+![Share of movement, kills and deaths in each fight zone](docs/img/insight-fight-zones.svg)
+
 **Is it actionable?**
 - Mine Pit: if a high-risk, high-reward centre is the goal, it is working. If not, spread some loot to the quarters or add more cover on the way in.
 - River: check cover at the crossings and whether there are enough ways across.
@@ -81,6 +85,8 @@ Players die there more often than you would expect from how much time they spend
 | Ambrose Valley | 2.1 | 3.0 |
 | Lockdown | 1.4 | 2.0 |
 | GrandRift | 1.7 | 2.7 |
+
+![Loot per minute, died vs survived, per map](docs/img/insight-loot-pace.svg)
 
 It is per minute, so it is not just that survivors played longer. On every map, survivors looted 40% to 60% faster. This shows the two go together, not that one causes the other.
 

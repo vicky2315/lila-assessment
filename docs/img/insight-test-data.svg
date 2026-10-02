@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="378" viewBox="0 0 720 378" role="img" aria-label="Most matches recorded one player, and bots caused almost every death">
+<style>
+  svg { --surface:#fcfcfb; --text:#0b0b0b; --text2:#52514e; --muted:#8a8984; --grid:#e4e3df;
+        --s1:#2a78d6; --s2:#eb6834; --base:#b4b2ab; --died:#86b6ef; --survived:#1c5cab; }
+  @media (prefers-color-scheme: dark) {
+    svg { --surface:#1a1a19; --text:#ffffff; --text2:#c3c2b7; --muted:#8f8e86; --grid:#33332f;
+          --s1:#3987e5; --s2:#d95926; --base:#6e6d68; --died:#2a78d6; --survived:#86b6ef; }
+  }
+  text { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; fill: var(--text); }
+  .title { font-size: 16px; font-weight: 600; }
+  .sub { font-size: 12px; fill: var(--text2); }
+  .label { font-size: 12px; fill: var(--text2); }
+  .value { font-size: 12px; font-weight: 600; }
+  .axis { font-size: 11px; fill: var(--muted); }
+  .grid { stroke: var(--grid); stroke-width: 1; }
+</style>
+<title>Most matches recorded one player, and bots caused almost every death</title>
+<rect width="720" height="378" rx="8" fill="var(--surface)"/>
+<text class="title" x="24" y="34">Most matches recorded one player, and bots caused almost every death</text><text class="sub" x="24" y="54">All 796 matches, Feb 10 to 14, 2026</text><text class="value" x="24" y="90">Matches, by players recorded</text><text class="label" x="24" y="121">1 human only</text><path d="M174,106 h466.0 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-466.0 z" fill="var(--s1)"/><text class="value" x="652.0" y="121">743</text><text class="label" x="24" y="151">1 human + bot files</text><path d="M174,136 h18.8 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-18.8 z" fill="var(--s1)"/><text class="value" x="204.77254374158815" y="151">36</text><text class="label" x="24" y="181">Bot files only</text><path d="M174,166 h6.1 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-6.1 z" fill="var(--s1)"/><text class="value" x="192.12113055181695" y="181">16</text><text class="label" x="24" y="211">2 humans</text><rect x="174" y="196" width="2.0" height="20" fill="var(--s1)"/><text class="value" x="184" y="211">1</text><text class="value" x="24" y="256">What killed human players (442 deaths)</text><text class="label" x="24" y="287">Bots</text><path d="M174,272 h466.0 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-466.0 z" fill="var(--s1)"/><text class="value" x="652.0" y="287">400</text><text class="label" x="24" y="317">Storm</text><path d="M174,302 h41.8 a4,4 0 0 1 4,4 v12 a4,4 0 0 1 -4,4 h-41.8 z" fill="var(--s1)"/><text class="value" x="227.825" y="317">39</text><text class="label" x="24" y="347">Other humans</text><rect x="174" y="332" width="3.5" height="20" fill="var(--s1)"/><text class="value" x="185.525" y="347">3</text>
+</svg>
