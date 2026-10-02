@@ -15,7 +15,7 @@ The player data is already loaded. Nothing to install or upload. Use a desktop b
 1. Open the [live tool](https://vicky2315.github.io/lila-assessment/).
 2. Pick a map at the top left: **Ambrose Valley**, **Grand Rift** or **Lockdown**. The number under each is how many matches it has.
 3. Under **Days**, click a day to turn it on or off. **All** turns every day back on.
-4. Under **Heatmap**, pick a layer: **Traffic** (where players walk), **Kills**, **Deaths**, **Storm deaths** or **Loot**. Brighter means more.
+4. Under **Heatmap**, pick a layer: **Traffic** (where players walk), **Kills**, **Deaths**, **Storm deaths** or **Loot**. Colour shows how much happens there, not who: the bar under the sliders goes from purple (fewer) to yellow (more).
 5. If the heatmap is hard to see, move **Intensity** to the right. **Opacity** fades it in and out.
 
 **Watch one match**

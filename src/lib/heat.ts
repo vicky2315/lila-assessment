@@ -71,6 +71,9 @@ const RAMP: [number, number, number, number, number][] = [
   [1.0, 255, 245, 120, 240],
 ]
 
+/** The same ramp as a CSS gradient, for the colour key in the sidebar */
+export const RAMP_GRADIENT = `linear-gradient(to right, ${RAMP.map(([p, r, g, b, a]) => `rgba(${r}, ${g}, ${b}, ${(a / 255).toFixed(2)}) ${p * 100}%`).join(', ')})`
+
 function rampColor(x: number): [number, number, number, number] {
   for (let i = 1; i < RAMP.length; i++) {
     const [p1, ...c1] = RAMP[i]

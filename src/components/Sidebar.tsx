@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { HEAT_LAYERS } from '../lib/events'
 import { dayLabel, mmss, utcDateTime } from '../lib/format'
+import { RAMP_GRADIENT } from '../lib/heat'
 import type { DataIndex, HeatLayer, HeatScope, MapId, MatchSummary } from '../types'
 
 type SortKey = 'time' | 'duration' | 'kills' | 'bots'
@@ -24,6 +25,8 @@ interface Props {
   onHeatOpacity: (o: number) => void
   onHeatIntensity: (k: number) => void
   onReset: () => void
+  showHumans: boolean
+  showBots: boolean
 }
 
 const kills = (m: MatchSummary) => (m.n.Kill ?? 0) + (m.n.BotKill ?? 0)
@@ -34,6 +37,10 @@ const SORTERS: Record<SortKey, (a: MatchSummary, b: MatchSummary) => number> = {
   kills: (a, b) => kills(b) - kills(a),
   bots: (a, b) => b.bots - a.bots,
 }
+
+// Who the per-match heatmap counts: it follows the legend toggles
+const matchWho = (humans: boolean, bots: boolean) =>
+  humans && bots ? 'Counts humans and bots.' : humans ? 'Counts humans only.' : bots ? 'Counts bots only.' : 'Humans and bots are both hidden in the legend.'
 
 // Stated in the dataset README
 const PARTIAL_DAY = 'February_14'
@@ -118,8 +125,13 @@ export default function Sidebar(props: Props) {
               Intensity {heatIntensity}×
               <input type="range" min={1} max={5} step={0.5} value={heatIntensity} onChange={(e) => props.onHeatIntensity(Number(e.target.value))} />
             </label>
+            <div className="heat-key" aria-label="Heatmap colour key">
+              Fewer
+              <span className="heat-key-bar" style={{ background: RAMP_GRADIENT }} />
+              More
+            </div>
             <p className="note">
-              {heatTotal.toLocaleString()} {HEAT_LAYERS.find((l) => l.id === layer)!.label.toLowerCase()} events{' '}
+              {heatScope === 'match' ? matchWho(props.showHumans, props.showBots) : 'Counts humans and bots.'} {heatTotal.toLocaleString()} {HEAT_LAYERS.find((l) => l.id === layer)!.label.toLowerCase()} events{' '}
               {heatScope === 'match'
                 ? 'in this match so far. Builds up as the match plays.'
                 : `across all ${mapCounts[map] ?? 0} matches on the selected days.`}

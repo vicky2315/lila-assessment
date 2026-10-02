@@ -204,6 +204,8 @@ function Explorer({ index }: { index: DataIndex }) {
         onHeatOpacity={setHeatOpacity}
         onHeatIntensity={setHeatIntensity}
         onReset={resetView}
+        showHumans={showHumans}
+        showBots={showBots}
       />
       <main>
         <MapView
