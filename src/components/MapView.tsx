@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { EVENT_STYLE, PATH_STYLE, eventHint, type MarkerShape } from '../lib/events'
 import { mmss, shortId } from '../lib/format'
 import type { EventType, MapConfig, MatchDetail, MatchEvent, PlayerTrack } from '../types'
@@ -33,6 +33,7 @@ const MARKER_PX = 7
 const HIT_RADIUS_PX = 10
 const MIN_ZOOM = 0.5 // relative to fit
 const MAX_ZOOM = 16
+const GREY_BRIGHTNESS = 0.7 // minimap brightness under a heatmap, so heat colours stand out
 
 export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity, showHumans, showBots, visibleEvents }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -66,6 +67,10 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
       im.onload = null
     }
   }, [imageUrl])
+
+  // Grey, dimmed copy of the minimap, shown under a heatmap. Some minimaps (GrandRift) have red and
+  // orange zones painted on, which blend with the heat colours. Built once per image, not per frame.
+  const greyImg = useMemo(() => (img ? greyCopy(img, cfg.w, cfg.h) : null), [img, cfg.w, cfg.h])
 
   const fitScale = size.w && size.h ? Math.min(size.w / cfg.w, size.h / cfg.h) * 0.96 : 1
 
@@ -116,9 +121,11 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
     const px = (u: number) => u * cfg.w
     const py = (v: number) => (1 - v) * cfg.h // image y grows downward, world z grows "up"
 
-    if (img) ctx.drawImage(img, 0, 0, cfg.w, cfg.h)
+    const showHeat = heat && heatOpacity > 0
+    const base = showHeat ? greyImg : img
+    if (base) ctx.drawImage(base, 0, 0, cfg.w, cfg.h)
 
-    if (heat && heatOpacity > 0) {
+    if (showHeat) {
       ctx.save()
       ctx.globalAlpha = heatOpacity
       ctx.imageSmoothingEnabled = true
@@ -179,7 +186,7 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
       }
     }
     hitsRef.current = hits
-  }, [size, view, img, heat, heatOpacity, match, time, showHumans, showBots, visibleEvents, cfg])
+  }, [size, view, img, greyImg, heat, heatOpacity, match, time, showHumans, showBots, visibleEvents, cfg])
 
   // Clear stale hover when the data under it changes
   useEffect(() => setHover(null), [match, view])
@@ -310,4 +317,21 @@ function drawMarker(ctx: CanvasRenderingContext2D, shape: MarkerShape, color: st
   ctx.lineWidth = 1.5 / s
   ctx.strokeStyle = '#0b0d12'
   ctx.stroke()
+}
+
+/** Greyscale, dimmed copy of the minimap (luma weights from Rec. 601). */
+function greyCopy(img: HTMLImageElement, w: number, h: number): HTMLCanvasElement {
+  const c = document.createElement('canvas')
+  c.width = w
+  c.height = h
+  const ctx = c.getContext('2d')!
+  ctx.drawImage(img, 0, 0, w, h)
+  const data = ctx.getImageData(0, 0, w, h)
+  const d = data.data
+  for (let i = 0; i < d.length; i += 4) {
+    const y = (0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]) * GREY_BRIGHTNESS
+    d[i] = d[i + 1] = d[i + 2] = y
+  }
+  ctx.putImageData(data, 0, 0)
+  return c
 }

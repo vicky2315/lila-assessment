@@ -4,7 +4,7 @@
 
 ## Current status
 
-**Phase:** Day 1, pipeline + scaffold
+**Phase:** Day 3, polish + docs
 **Next up:** Day 3 (insights using the tool, README, ARCHITECTURE.md, INSIGHTS.md, walkthrough).
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
@@ -59,3 +59,9 @@
 - **Next (Day 3, personal laptop):** find 3 insights using the tool, then README (with live URL, stack, setup, "no env vars"), ARCHITECTURE.md (one page), INSIGHTS.md, walkthrough. Task list: REQUIREMENTS §6.
 - **Personal laptop setup:** install Git + Node 24, `git clone https://github.com/vicky2315/lila-assessment.git`, `npm install`, `npm run dev`, set repo-local `git config user.email vigneshvinith23157@gmail.com` and `user.name Vignesh`.
 - **Only if re-running pipeline or audits:** Python 3.10+, raw `player_data/` next to the repo folder, `pip install -r scripts/requirements.txt`. UI audit also needs `npm i --no-save puppeteer-core` and a Chrome path argument if Chrome is not at the Windows default.
+
+### 2026-10-02 (Fri, personal laptop)
+- Setup: laptop had Node 20.17. Vite 8 needs 20.19+, so npm skipped the Windows bundler binding and the build failed. Installed Node 24 (per `.nvmrc`), reinstalled: build OK. npm 11 rewrote 4 `"peer"` lines in `package-lock.json`; reverted, no version changes.
+- Fix: GrandRift minimap has red and orange zones painted on (Mine Pit, quarters), so heat colours blended in. While a heatmap is on, the minimap is now drawn grey at 70% brightness (`MapView.tsx`, built once per image, not per frame). All maps, for consistency. Logged in AUDIT §3.1 #10.
+- UI audit re-run (Edge, Chrome not installed here): 25/25 PASS. Screenshots of GrandRift traffic and kills checked.
+- Noted, not changed: GrandRift kills heat is faint. Kill events are sparse there; unrelated to this fix.
