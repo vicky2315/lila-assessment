@@ -13,6 +13,7 @@ interface Props {
   showHumans: boolean
   showBots: boolean
   visibleEvents: Set<EventType>
+  fitKey: number // changes when the view is reset, to fit the map again
 }
 
 /** Screen transform: screen = image * scale + (tx, ty). All drawing happens in image pixel space. */
@@ -35,7 +36,7 @@ const MIN_ZOOM = 0.5 // relative to fit
 const MAX_ZOOM = 16
 const GREY_BRIGHTNESS = 0.7 // minimap brightness under a heatmap, so heat colours stand out
 
-export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity, showHumans, showBots, visibleEvents }: Props) {
+export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity, showHumans, showBots, visibleEvents, fitKey }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const hitsRef = useRef<Hit[]>([])
@@ -78,8 +79,9 @@ export default function MapView({ cfg, imageUrl, match, time, heat, heatOpacity,
     setView({ scale: fitScale, tx: (size.w - cfg.w * fitScale) / 2, ty: (size.h - cfg.h * fitScale) / 2 })
   }, [fitScale, size.w, size.h, cfg.w, cfg.h])
 
-  // Re-fit when the map or the window size changes
-  useEffect(fit, [fit])
+  // Re-fit when the map or the window size changes, or the view is reset
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(fit, [fit, fitKey])
 
   const zoomAt = useCallback(
     (factor: number, cx: number, cy: number) => {

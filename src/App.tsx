@@ -12,6 +12,9 @@ import type { DataIndex, EventType, HeatFile, HeatLayer, HeatScope, MapId, Match
 type HashKey = 'map' | 'days' | 'match' | 'layer' | 'heat'
 
 const DEFAULT_MAP: MapId = 'AmbroseValley'
+const DEFAULT_OPACITY = 0.7
+const DEFAULT_INTENSITY = 1
+const DEFAULT_SPEED = 10
 const NO_DAYS = 'none'
 const LAYER_IDS: (HeatLayer | 'none')[] = ['none', ...HEAT_LAYERS.map((l) => l.id)]
 
@@ -46,15 +49,17 @@ function Explorer({ index }: { index: DataIndex }) {
   const [showHumans, setShowHumans] = useState(true)
   const [showBots, setShowBots] = useState(true)
   const [visibleEvents, setVisibleEvents] = useState<Set<EventType>>(() => new Set(EVENT_ORDER))
-  const [heatOpacity, setHeatOpacity] = useState(0.7)
-  const [heatIntensity, setHeatIntensity] = useState(1)
+  // Bumped by Reset view: re-fits the map and remounts the sidebar (clears its search and sort)
+  const [resetCount, setResetCount] = useState(0)
+  const [heatOpacity, setHeatOpacity] = useState(DEFAULT_OPACITY)
+  const [heatIntensity, setHeatIntensity] = useState(DEFAULT_INTENSITY)
 
   // Selected match + playback
   const [loadedMatch, setMatch] = useState<MatchDetail | null>(null)
   const [matchError, setMatchError] = useState<string | null>(null)
   const [time, setTime] = useState(0)
   const [playing, setPlaying] = useState(false)
-  const [speed, setSpeed] = useState(10)
+  const [speed, setSpeed] = useState(DEFAULT_SPEED)
 
   useEffect(() => {
     setPlaying(false)
@@ -156,6 +161,19 @@ function Explorer({ index }: { index: DataIndex }) {
   const selectDays = (d: string[]) => setHash({ days: d.length === index.days.length ? null : d.length ? d.join(',') : NO_DAYS })
   const selectLayer = (l: HeatLayer | 'none') => setHash({ layer: l === 'traffic' ? null : l })
 
+  // Back to the default view: clears the URL state and every local setting
+  const resetView = () => {
+    setHash({ map: null, days: null, match: null, layer: null, heat: null })
+    setShowHumans(true)
+    setShowBots(true)
+    setVisibleEvents(new Set(EVENT_ORDER))
+    setHeatOpacity(DEFAULT_OPACITY)
+    setHeatIntensity(DEFAULT_INTENSITY)
+    setSpeed(DEFAULT_SPEED)
+    setPlaying(false)
+    setResetCount((n) => n + 1)
+  }
+
   const toggleEvent = (e: EventType) =>
     setVisibleEvents((prev) => {
       const next = new Set(prev)
@@ -167,6 +185,7 @@ function Explorer({ index }: { index: DataIndex }) {
   return (
     <div className="app">
       <Sidebar
+        key={resetCount}
         index={index}
         map={map}
         days={days}
@@ -184,6 +203,7 @@ function Explorer({ index }: { index: DataIndex }) {
         onLayer={selectLayer}
         onHeatOpacity={setHeatOpacity}
         onHeatIntensity={setHeatIntensity}
+        onReset={resetView}
       />
       <main>
         <MapView
@@ -196,6 +216,7 @@ function Explorer({ index }: { index: DataIndex }) {
           showHumans={showHumans}
           showBots={showBots}
           visibleEvents={visibleEvents}
+          fitKey={resetCount}
         />
         <Legend
           match={match}

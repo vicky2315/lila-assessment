@@ -23,6 +23,7 @@ interface Props {
   onLayer: (l: HeatLayer | 'none') => void
   onHeatOpacity: (o: number) => void
   onHeatIntensity: (k: number) => void
+  onReset: () => void
 }
 
 const kills = (m: MatchSummary) => (m.n.Kill ?? 0) + (m.n.BotKill ?? 0)
@@ -62,7 +63,10 @@ export default function Sidebar(props: Props) {
   return (
     <aside className="sidebar">
       <section>
-        <h2>Map</h2>
+        <h2>
+          Map
+          <button className="link" onClick={props.onReset} title="Back to the default view">Reset view</button>
+        </h2>
         <div className="seg">
           {(Object.keys(index.maps) as MapId[]).map((m) => (
             <button key={m} className={m === map ? 'active' : ''} onClick={() => props.onMap(m)}>

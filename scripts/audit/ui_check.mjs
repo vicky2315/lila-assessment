@@ -147,6 +147,22 @@ try {
   check('days: none selected shows guidance', (await page.$eval('.sidebar', (el) => el.textContent)).includes('Select at least one day'))
   check('days: empty selection kept in URL', (await page.evaluate(() => location.hash)).includes('days=none'))
 
+  // 13b. Reset view brings back the default view (URL, toggles, search)
+  await page.evaluate(() => [...document.querySelectorAll('.legend-row')].find((r) => r.textContent.includes('Bot')).querySelector('input').click())
+  await page.type('input[type=search]', 'abc')
+  await clickText('.sidebar button', 'Reset view')
+  await sleep(300)
+  const reset = await page.evaluate(() => ({
+    hash: location.hash,
+    map: document.querySelector('.seg button.active')?.textContent ?? '',
+    offDays: document.querySelectorAll('.chip:not(.active)').length,
+    traffic: [...document.querySelectorAll('.sidebar button.active')].some((b) => b.textContent.trim() === 'Traffic'),
+    bots: [...document.querySelectorAll('.legend-row')].find((r) => r.textContent.includes('Bot')).querySelector('input').checked,
+    search: document.querySelector('input[type=search]').value,
+  }))
+  check('reset view: URL cleared, default map, days and layer', reset.hash === '' && reset.map.startsWith('Ambrose Valley') && reset.offDays === 0 && reset.traffic, JSON.stringify(reset))
+  check('reset view: legend toggles and search cleared', reset.bots && reset.search === '')
+
   // 14. Every map loads its image
   for (const m of ['Ambrose Valley', 'Grand Rift', 'Lockdown']) {
     await page.goto(BASE, { waitUntil: 'networkidle0' })

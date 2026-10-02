@@ -37,6 +37,10 @@ The player data is already loaded. Nothing to install or upload. Use a desktop b
 
 Copy the page address. It keeps the map, days, match and heatmap, so anyone who opens it sees the same view.
 
+**Start over**
+
+Click **Reset view** (next to **Map**) to go back to the default view.
+
 ## What it does
 
 - Shows each player's path on the correct minimap. Humans are solid bright lines, bots are dashed and muted.

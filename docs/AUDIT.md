@@ -195,7 +195,7 @@ Run before submission, on the personal laptop (raw data not on this machine).
 | Data unchanged since the full raw check (`de2b7e1`) | No change to `public/data`, minimaps or `preprocess.py` since then |
 | Match files vs index vs heat files | PASS, 0 problems: 89,104 rows, 796 matches, heat totals match events on 3 maps x 5 layers, all positions inside the map, bot flags match the ID rule |
 | README coordinate example | (78, 890), matches |
-| UI audit on the live site | PASS, 25/25 |
+| UI audit on the live site | PASS, 25/25. After adding Reset view: 27/27 (2 new checks for it) |
 | Links and images in all docs | None broken |
 | Em dashes | None |
 
