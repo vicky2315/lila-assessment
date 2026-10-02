@@ -90,7 +90,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Timeline or playback shows match progression
 - [x] Heatmaps show kill zones, death zones, and traffic
 - [ ] Architecture doc covers coordinate mapping approach
-- [ ] Three insights with supporting evidence
+- [x] Three insights with supporting evidence
 - [ ] Walkthrough covers all major features
 
 ## 4. Data rules (verified against raw data)
@@ -144,7 +144,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Full audit (docs/AUDIT.md), fixes applied, re-run passes
 - [x] User decisions on "as is" items (AUDIT §3.2): A keep all rows, B raw names, C keep smooth playback
 - [ ] Polish, empty/loading/error states, edge cases
-- [ ] Find 3 insights using tool
+- [x] Find 3 insights using tool
 - [ ] README, ARCHITECTURE.md, INSIGHTS.md
 - [ ] Record walkthrough
 - [ ] Final checklist pass (brief p.5–6), submit repo link

@@ -8,3 +8,4 @@
 - Work moves between two laptops. Keep everything needed in this repo. No absolute paths, no machine-specific setup. Raw `player_data/` is never committed.
 - `docs/DATA_PIPELINE.md` explains how the raw data was parsed and why. Read it before changing `scripts/preprocess.py`.
 - `docs/AUDIT.md` records the full audit. Re-run `scripts/audit/verify_data.py` after any pipeline change and `scripts/audit/ui_check.mjs` after any UI change.
+- Commit messages: no `Co-Authored-By` or other AI attribution lines.
