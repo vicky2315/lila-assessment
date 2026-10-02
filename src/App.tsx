@@ -47,6 +47,7 @@ function Explorer({ index }: { index: DataIndex }) {
   const [showBots, setShowBots] = useState(true)
   const [visibleEvents, setVisibleEvents] = useState<Set<EventType>>(() => new Set(EVENT_ORDER))
   const [heatOpacity, setHeatOpacity] = useState(0.7)
+  const [heatIntensity, setHeatIntensity] = useState(1)
 
   // Selected match + playback
   const [loadedMatch, setMatch] = useState<MatchDetail | null>(null)
@@ -139,14 +140,14 @@ function Explorer({ index }: { index: DataIndex }) {
   const aggregateHeat = useMemo(() => {
     if (!heatFile || layer === 'none' || heatScope !== 'all') return null
     const { grid, total } = sumHeat(heatFile, days, layer)
-    return { canvas: total ? heatToCanvas(grid, heatFile.bins) : null, total }
-  }, [heatFile, days, layer, heatScope])
+    return { canvas: total ? heatToCanvas(grid, heatFile.bins, heatIntensity) : null, total }
+  }, [heatFile, days, layer, heatScope, heatIntensity])
 
   const perMatchHeat = useMemo(() => {
     if (!match || layer === 'none' || heatScope !== 'match') return null
     const { grid, total } = matchHeat(match, layer, time, showHumans, showBots)
-    return { canvas: total ? heatToCanvas(grid, MATCH_HEAT_BINS) : null, total }
-  }, [match, layer, heatScope, time, showHumans, showBots])
+    return { canvas: total ? heatToCanvas(grid, MATCH_HEAT_BINS, heatIntensity) : null, total }
+  }, [match, layer, heatScope, time, showHumans, showBots, heatIntensity])
 
   const heat = aggregateHeat ?? perMatchHeat ?? { canvas: null, total: 0 }
 
@@ -172,6 +173,7 @@ function Explorer({ index }: { index: DataIndex }) {
         matchId={matchId}
         layer={layer}
         heatOpacity={heatOpacity}
+        heatIntensity={heatIntensity}
         heatTotal={heat.total}
         heatScope={heatScope}
         hasMatch={!!match}
@@ -181,6 +183,7 @@ function Explorer({ index }: { index: DataIndex }) {
         onMatch={selectMatch}
         onLayer={selectLayer}
         onHeatOpacity={setHeatOpacity}
+        onHeatIntensity={setHeatIntensity}
       />
       <main>
         <MapView

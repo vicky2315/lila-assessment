@@ -65,3 +65,4 @@
 - Fix: GrandRift minimap has red and orange zones painted on (Mine Pit, quarters), so heat colours blended in. While a heatmap is on, the minimap is now drawn grey at 70% brightness (`MapView.tsx`, built once per image, not per frame). All maps, for consistency. Logged in AUDIT §3.1 #10.
 - UI audit re-run (Edge, Chrome not installed here): 25/25 PASS. Screenshots of GrandRift traffic and kills checked.
 - Noted, not changed: GrandRift kills heat is faint. Kill events are sparse there; unrelated to this fix.
+- User asked for a way to make faint heat stronger. Added an "Intensity" slider (1× to 5×) under Opacity. First try multiplied cell counts before colouring: no help, because sparse cells were already at the top colour and the blur thins them out. Final version multiplies alpha after the blur. GrandRift kills now readable at 3×. UI audit 25/25 PASS. Logged in AUDIT §3.1 #11.

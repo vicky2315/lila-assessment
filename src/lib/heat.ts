@@ -86,8 +86,10 @@ function rampColor(x: number): [number, number, number, number] {
 /**
  * Render a grid to a small canvas (1 px per cell). The map view scales it up with smoothing and blur.
  * Uses sqrt scaling so a few very hot cells don't wash out everything else.
+ * `intensity` multiplies the colour's alpha after the blur. Sparse layers (few events) blur out thin,
+ * so this makes them easier to see without changing which colour a cell gets.
  */
-export function heatToCanvas(grid: Float32Array, bins: number): HTMLCanvasElement {
+export function heatToCanvas(grid: Float32Array, bins: number, intensity = 1): HTMLCanvasElement {
   const canvas = document.createElement('canvas')
   canvas.width = bins
   canvas.height = bins
@@ -111,6 +113,12 @@ export function heatToCanvas(grid: Float32Array, bins: number): HTMLCanvasElemen
   octx.imageSmoothingEnabled = true
   octx.filter = `blur(${HEAT_BLUR_PX}px)`
   octx.drawImage(canvas, 0, 0, HEAT_RENDER_PX, HEAT_RENDER_PX)
+  if (intensity !== 1) {
+    const px = octx.getImageData(0, 0, HEAT_RENDER_PX, HEAT_RENDER_PX)
+    const d = px.data
+    for (let i = 3; i < d.length; i += 4) d[i] = Math.min(255, d[i] * intensity)
+    octx.putImageData(px, 0, 0)
+  }
   return out
 }
 

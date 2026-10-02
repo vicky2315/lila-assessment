@@ -12,6 +12,7 @@ interface Props {
   matchId: string | null
   layer: HeatLayer | 'none'
   heatOpacity: number
+  heatIntensity: number
   heatTotal: number
   heatScope: HeatScope
   hasMatch: boolean
@@ -21,6 +22,7 @@ interface Props {
   onMatch: (id: string | null) => void
   onLayer: (l: HeatLayer | 'none') => void
   onHeatOpacity: (o: number) => void
+  onHeatIntensity: (k: number) => void
 }
 
 const kills = (m: MatchSummary) => (m.n.Kill ?? 0) + (m.n.BotKill ?? 0)
@@ -38,7 +40,7 @@ const PARTIAL_DAY = 'February_14'
 // Most matches have one human and no bot files: bots they fought appear only as BotKill/BotKilled events.
 
 export default function Sidebar(props: Props) {
-  const { index, map, days, matchId, layer, heatOpacity, heatTotal, heatScope, hasMatch } = props
+  const { index, map, days, matchId, layer, heatOpacity, heatIntensity, heatTotal, heatScope, hasMatch } = props
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<SortKey>('time')
 
@@ -107,6 +109,10 @@ export default function Sidebar(props: Props) {
             <label className="slider">
               Opacity
               <input type="range" min={0.1} max={1} step={0.05} value={heatOpacity} onChange={(e) => props.onHeatOpacity(Number(e.target.value))} />
+            </label>
+            <label className="slider" title="Boosts faint areas. Useful for layers with few events.">
+              Intensity {heatIntensity}×
+              <input type="range" min={1} max={5} step={0.5} value={heatIntensity} onChange={(e) => props.onHeatIntensity(Number(e.target.value))} />
             </label>
             <p className="note">
               {heatTotal.toLocaleString()} {HEAT_LAYERS.find((l) => l.id === layer)!.label.toLowerCase()} events{' '}

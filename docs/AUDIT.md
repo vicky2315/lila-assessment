@@ -82,6 +82,7 @@ python scripts/audit/verify_data.py
 | 8 | Heat grids: counts per cell (128 grid all matches, 64 grid per match) | The brief requires heatmaps; a heatmap is a count per area | Position within a cell |
 | 9 | Heat colour scale: capped at the 98th percentile, gamma 0.6, blurred | Otherwise one hot cell makes the rest invisible | Visual only; the hottest 2% of cells show the same top colour |
 | 10 | Minimap drawn in grey at 70% brightness while a heatmap is on | GrandRift's minimap has red and orange zones painted on, which hid the heat colours | Visual only; map colours return when heat is off |
+| 11 | Heat "Intensity" slider (1× to 5×, default 1×) multiplies colour alpha after the blur | Sparse layers (e.g. GrandRift kills, 193 events) blur out too thin to see | Visual only; cell colours and counts unchanged |
 
 ### 3.2 Interpretations (decided by the user, 09-30)
 
