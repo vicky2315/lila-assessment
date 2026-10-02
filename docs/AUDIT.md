@@ -183,3 +183,19 @@ Checked and fine: the pipeline logic (confirmed by step 2), map/days/match URL f
 - File count corrected from 1,242 to 1,243 (DATA_PIPELINE.md, PROGRESS.md).
 - REQUIREMENTS status columns were never updated. R1 to R8, D1 and the brief checklist now show what is done, with the audit step that proves it.
 - No em dashes in any tracked file.
+
+---
+
+## Final check: 2026-10-02
+
+Run before submission, on the personal laptop (raw data not on this machine).
+
+| Check | Result |
+|---|---|
+| Data unchanged since the full raw check (`de2b7e1`) | No change to `public/data`, minimaps or `preprocess.py` since then |
+| Match files vs index vs heat files | PASS, 0 problems: 89,104 rows, 796 matches, heat totals match events on 3 maps x 5 layers, all positions inside the map, bot flags match the ID rule |
+| README coordinate example | (78, 890), matches |
+| UI audit on the live site | PASS, 25/25 |
+| Links and images in all docs | None broken |
+| Em dashes | None |
+

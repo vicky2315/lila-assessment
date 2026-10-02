@@ -1,14 +1,14 @@
 # Insights
 
-Three things I found while using the tool. Each one says what caught my eye, the evidence, what could be done about it, and why a level designer should care.
+Three things I found while using the tool. Each one gives all information that was asked in the assessment document.
 
-All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deaths" means deaths of human players unless stated otherwise. `scripts/insights/charts.py` recomputes every number here from the same data the tool loads and draws the charts.
+All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deaths" means deaths of human players unless stated otherwise.
 
 ---
 
 ## 1. Most of this data looks like test matches, not real games
 
-**What caught my eye.** Almost every match in the list says "1 human". Opening them, there is only ever one path on the map. The bots that player fought only show up as kill markers, never as paths of their own.
+Almost every match in the list says "1 human". Opening them, there is only ever one path on the map. The bots that player fought only show up as kill markers, never as paths of their own.
 
 **Evidence.**
 
@@ -23,20 +23,20 @@ All numbers come from the 796 matches in the dataset (Feb 10 to 14, 2026). "Deat
 
 The deaths point the same way. Out of 442 human deaths, 400 (90%) were caused by bots and 39 by the storm. Only **3** were caused by another human. Across all matches, humans killed 2,232 bots and only 3 humans.
 
-A real battle royale with many players would have far more player-vs-player kills. One human playing against bots, again and again, looks a lot like test runs or smoke tests.
+A real extraction shooter with many players would have far more player-vs-player kills. One human playing against bots, again and again, looks a lot like test runs or smoke tests.
 
 **Is it actionable?**
 - Check with the data team which sessions were internal tests, and tag them in the telemetry.
 - Until then, treat any balance conclusion from this dataset with care. It mostly shows how one player does against bots.
 - Metrics affected: share of matches with more than one human, share of deaths caused by humans.
 
-**Why a level designer should care.** If the heatmaps are built from test matches, a fight zone might only be a bot spawn area, not a place real players choose to fight. Map changes based on this data could end up tuned for bots.
+**Why a level designer should care.** This can be used for players who are basically new to the game and genre and can be seen as what their playthrough looks like. Smaller playthroughs would mean the game is tough for them.
 
 ---
 
 ## 2. Two classic fight zones: Mine Pit (GrandRift) and the river (Ambrose Valley)
 
-**What caught my eye.** On GrandRift, the kills heatmap lights up right on Mine Pit, the red zone in the middle of the map. On Ambrose Valley, the deaths heatmap follows the river that cuts through the centre.
+On GrandRift, the kills heatmap lights up right on Mine Pit, the red zone in the middle of the map. On Ambrose Valley, the deaths heatmap follows the river that cuts through the centre.
 
 ![GrandRift kills heatmap](docs/img/grandrift-kills.jpg)
 
@@ -70,15 +70,15 @@ Players die there more often than you would expect from how much time they spend
 - River: check cover at the crossings and whether there are enough ways across.
 - Metrics affected: share of deaths per zone, deaths near the river compared with time spent there.
 
-**Why a level designer should care.** These are the places that shape how a match plays out. Small changes to cover or loot there will move more fights than changes anywhere else on the map.
+**Why a level designer should care.** These are the places that shape how a match plays out. We can try different iterations of loot distribution and maybe some environment changes that cater to snipers or short range weapons like close quarters can be tested here. 
 
 ---
 
 ## 3. Players who die were picking up less loot
 
-**What caught my eye.** Opening matches where the player died, their loot markers were sparse compared with matches where the player survived.
+Opening matches where the player died, their loot markers were sparse compared with matches where the player survived.
 
-**Evidence.** Loot per minute alive, for players who lasted at least one minute:
+Below is a table for loot per minute alive, for players who lasted at least one minute:
 
 | Map | Died | Survived |
 |---|---|---|
@@ -94,4 +94,4 @@ It is per minute, so it is not just that survivors played longer. On every map, 
 - Look at how much loot sits near spawn points and along the first routes players take.
 - Metrics affected: loot picked up in the first two minutes, early death rate.
 
-**Why a level designer should care.** If players who start slow on loot are the ones who die, loot placement near spawns decides who gets a fair start.
+**Why a level designer should care.** If players who start slow on loot are the ones who die, I think the loot placement works exactly as intended, you do need loot to survive longer, unless you have a very stealthy playstyle and have a good strategy of killing someone with more loot when the storm closes in.

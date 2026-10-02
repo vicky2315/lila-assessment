@@ -74,10 +74,10 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 | ID | Deliverable | Status |
 |---|---|---|
 | D1 | All source code for the tool | ✅ audit 6 |
-| D2 | Working deployment URL (in README) | ☐ |
-| D3 | README: tech stack, setup steps, env vars (state "none" explicitly) | ☐ |
-| D4 | ARCHITECTURE.md, **max 1 page**: (a) what built with + why, (b) data flow parquet → screen, (c) coordinate mapping walkthrough ("the tricky part"), (d) assumptions where data ambiguous + how handled, (e) major tradeoffs table | ☐ |
-| D5 | INSIGHTS.md: 3 insights **found using the tool**. Each: (a) what caught eye, (b) evidence (pattern or stat), (c) actionable? metrics affected + action items, (d) why LD should care | ☐ |
+| D2 | Working deployment URL (in README) | ✅ |
+| D3 | README: tech stack, setup steps, env vars (state "none" explicitly) | ✅ |
+| D4 | ARCHITECTURE.md, **max 1 page**: (a) what built with + why, (b) data flow parquet → screen, (c) coordinate mapping walkthrough ("the tricky part"), (d) assumptions where data ambiguous + how handled, (e) major tradeoffs table | ✅ |
+| D5 | INSIGHTS.md: 3 insights **found using the tool**. Each: (a) what caught eye, (b) evidence (pattern or stat), (c) actionable? metrics affected + action items, (d) why LD should care | ✅ |
 | D6 | Walkthrough covering all major features (format not specified → short video/GIF, linked in README, file or link inside repo) | ☐ |
 
 ## 3.1 Brief's pre-submit checklist (verbatim, tick at end)
@@ -89,7 +89,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] Filtering by map/date/match works
 - [x] Timeline or playback shows match progression
 - [x] Heatmaps show kill zones, death zones, and traffic
-- [ ] Architecture doc covers coordinate mapping approach
+- [x] Architecture doc covers coordinate mapping approach
 - [x] Three insights with supporting evidence
 - [ ] Walkthrough covers all major features
 
@@ -145,6 +145,6 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 - [x] User decisions on "as is" items (AUDIT §3.2): A keep all rows, B raw names, C keep smooth playback
 - [ ] Polish, empty/loading/error states, edge cases
 - [x] Find 3 insights using tool
-- [ ] README, ARCHITECTURE.md, INSIGHTS.md
+- [x] README, ARCHITECTURE.md, INSIGHTS.md
 - [ ] Record walkthrough
 - [ ] Final checklist pass (brief p.5–6), submit repo link
