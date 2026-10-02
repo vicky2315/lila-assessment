@@ -4,8 +4,8 @@
 
 ## Current status
 
-**Phase:** Day 3, polish + docs
-**Next up:** Day 3 (insights using the tool, README, ARCHITECTURE.md, INSIGHTS.md, walkthrough).
+**Phase:** Done. Ready to submit.
+**Next up:** submit https://github.com/vicky2315/lila-assessment
 **Blockers:** none. Repo created: https://github.com/vicky2315/lila-assessment
 
 ## Log
@@ -78,3 +78,4 @@
 - Added a heatmap colour key (Fewer to More bar, same colours as the heatmap) and a line saying who is counted (humans and bots; per match it follows the legend toggles). Reason: user read red/yellow as human/bot. UI audit 27/27 PASS.
 - Fixed walkthrough shot list: first suggested match (de5aa1ae) has 0 humans. Replaced with d3a3297e (1 human, 13 bots).
 - Walkthrough recorded by user (5:36, 720p, 263 MB). Compressed with ffmpeg (H.264 CRF 28, AAC 96k, faststart; ffmpeg-static installed with --no-save) to 16.3 MB as `docs/walkthrough.mp4`, linked in README. `*.mp4` marked binary in .gitattributes. D6 done: every requirement and deliverable is now ticked.
+- All requirements, deliverables and the brief's checklist are ticked. Ready to submit.

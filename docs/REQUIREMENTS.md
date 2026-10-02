@@ -143,7 +143,7 @@ Submission = **one GitHub repo link**. Doc/Drive links are rejected, so everythi
 ### Day 3: Fri 10-02
 - [x] Full audit (docs/AUDIT.md), fixes applied, re-run passes
 - [x] User decisions on "as is" items (AUDIT §3.2): A keep all rows, B raw names, C keep smooth playback
-- [ ] Polish, empty/loading/error states, edge cases
+- [x] Polish, empty/loading/error states, edge cases (covered by AUDIT §4, §5 and the final check; plus Reset view and heatmap colour key)
 - [x] Find 3 insights using tool
 - [x] README, ARCHITECTURE.md, INSIGHTS.md
 - [x] Record walkthrough
